@@ -16,4 +16,4 @@ here the "uy" is the name of the hidden wifi and "fxjqygyx" is the password (eve
 at the beginning of the script, there are some variable you should choose according to your hardware 
 they are the name of ethernet and wireless you can see with the command "sudo ip link show"
 
-This script also changes the TTL of packets of divices connected to your laptop, so ISP can not detect them and block them
+This script also changes the TTL of packets of devices connected to your laptop, so ISP can not detect them and block them
