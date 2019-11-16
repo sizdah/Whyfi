@@ -48,12 +48,10 @@ def cleanup():
                 print(case," Removed")
     print("done with clean up")
 
-def fun():
-    os.system('figlet HOTSPOT IS COMMING')
 
 
 
-fun()
+print("HOTSPOT IS STARTING")
 p1 = Process(target=hotspot)
 p2 = Process(target=ttl_shift)
 
