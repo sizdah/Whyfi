@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
+# In[8]:
 
 
 from multiprocessing import Process
@@ -17,7 +18,7 @@ import string
 lan = "enp2s0"
 wireless = "wlp3s0"
 ap = "ap0" #usually you do not how to change it
-
+time_shift = 2 #this is the time for shifting the packets from the conected device to your hotspot to confuse ISP
 
 def randomString(stringLength=10):
     """Generate a random string of fixed length """
@@ -27,14 +28,14 @@ def randomString(stringLength=10):
 def hotspot():
     channels = [3,4,5,8,7,9,10,12,13]#list of channel from which a channel will be used to broadcast
     random_mac = RandMac("00:00:00:00:00:00", True)
-    line = "create_ap -c "+str(channels[random.randint(0, len(channels)-1 )])+" --hidden --mac "+str(random_mac)+" "+wireless+" "+lan+" "+"+randomString(random.randint(1,4))+" "+randomString(8)
+    line = "create_ap -c "+str(channels[random.randint(0, len(channels)-1 )])+" --hidden --mac "+str(random_mac)+" "+wireless+" "+lan+" "+randomString(random.randint(1,4))+" "+randomString(8)
     print(line)
     os.system(line)
 
 def ttl_shift():
     print("Ditch out the ISP for mac address filtering ^_^...")
-    os.system("iptables -w -t mangle -I PREROUTING -i "+ap+" -j TTL --ttl-inc 2")
-    os.system("iptables -w -t mangle -I PREROUTING -i "+lan+" -j TTL --ttl-inc 2")
+    os.system("iptables -w -t mangle -I PREROUTING -i "+ap+" -j TTL --ttl-inc "+str(time_shift))
+    os.system("iptables -w -t mangle -I PREROUTING -i "+lan+" -j TTL --ttl-inc "+str(time_shift))
     print("Now you can connect! , press Ctrl+C to disconnect")
 
 
@@ -48,10 +49,12 @@ def cleanup():
                 print(case," Removed")
     print("done with clean up")
 
+def fun():
+    os.system('figlet HOTSPOT IS COMMING')
 
 
 
-print("HOTSPOT IS STARTING")
+fun()
 p1 = Process(target=hotspot)
 p2 = Process(target=ttl_shift)
 
@@ -60,3 +63,8 @@ p1.start()
 print("Enabling Hotspot")
 sleep(7)
 p2.start()
+
+# In[ ]:
+
+
+
