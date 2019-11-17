@@ -16,8 +16,11 @@ import string
 
 lan = "enp2s0"
 wireless = "wlp3s0"
-ap = "ap0" #usually you do not how to change it
-time_shift = 2 #this is the time for shifting the packets from the conected device to your hotspot to confuse ISP
+
+
+
+ap = "ap0" #usually you do not need to change it
+time_shift = 2 #this is the time for shifting the packets from the conected device to your hotspot to confuse ISP 
 
 def randomString(stringLength=10):
     """Generate a random string of fixed length """
