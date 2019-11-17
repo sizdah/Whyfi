@@ -4,6 +4,8 @@ a simple script to auto-config create_ap so you can create a hotspot on Linux, a
 First, you should install create_ap script from here or in arch Linux use "sudo pacman -S create_ap"
 https://github.com/oblique/create_ap
 
+This script uses IPTABLES which you should install on your machine. ( sudo apt install iptanles )
+
 This script also requires RandMac library which you should install using pip install randmac
 
 every time this script uses a random MAC and also a random name and a random channel and random password and establish a hidden hotspot and then show the output on terminal something like:
@@ -14,6 +16,6 @@ here the "uy" is the name of the hidden wifi and "fxjqygyx" is the password (eve
 
 
 at the beginning of the script, there are some variable you should choose according to your hardware 
-they are the name of ethernet and wireless you can see with the command "sudo ip link show"
+they are the names of ethernet and wireless device which you can see with the command "sudo ip link show"
 
 This script also changes the TTL of packets of devices connected to your laptop, so ISP can not detect them and block them
