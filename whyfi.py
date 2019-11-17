@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[8]:
 
 
 from multiprocessing import Process
@@ -49,12 +48,8 @@ def cleanup():
                 print(case," Removed")
     print("done with clean up")
 
-def fun():
-    os.system('figlet HOTSPOT IS COMMING')
 
-
-
-fun()
+print("HOT SPOT IS STARTING")
 p1 = Process(target=hotspot)
 p2 = Process(target=ttl_shift)
 
@@ -64,7 +59,6 @@ print("Enabling Hotspot")
 sleep(7)
 p2.start()
 
-# In[ ]:
 
 
 
