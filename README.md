@@ -1,10 +1,12 @@
 # Whyfi
 a simple script to auto-config create_ap so you can create a hotspot on Linux, also bypass mac address filtering and stay anonymous
 
-First, you should install create_ap script from here or in arch Linux use "sudo pacman -S create_ap"
+First, you should install create_ap script from the given Github link or if you are using arch Linux use "sudo pacman -S create_ap"
+
+create_ap link:
 https://github.com/oblique/create_ap
 
-This script uses IPTABLES which you should install on your machine. ( sudo apt install iptanles )
+This script uses IPTABLES which you should install on your machine if you already dont have. ( sudo apt install iptanbles )
 
 This script also requires RandMac library which you should install using pip install randmac
 
