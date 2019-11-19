@@ -6,7 +6,7 @@ First, you should install create_ap script from the given Github link or if you 
 create_ap link:
 https://github.com/oblique/create_ap
 
-This script uses IPTABLES which you should install on your machine if you already dont have. ( sudo apt install iptanbles )
+This script uses IPTABLES which you should install on your machine if you already dont have. ( sudo apt install iptables )
 
 This script also requires RandMac library which you should install using pip install randmac
 
