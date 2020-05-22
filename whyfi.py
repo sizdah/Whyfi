@@ -61,7 +61,7 @@ def vpn(): #Here I am using ProtonVpn in CLI mode, you already had to install it
 
 def fun():
     os.system('figlet HOTSPOT IS COMMING') # if have to make figlet installed, else you can comment this line and uncomment the next line
-    #print("Hot spot is comming\n");
+    #print("Hot spot is comming");
 
 
 
