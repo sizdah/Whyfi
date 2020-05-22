@@ -9,7 +9,7 @@ import string
 import argparse
 
 parser = argparse.ArgumentParser()
-parser.add_argument("--paranoid", nargs="?", default=True, help="It defines if your data goes over a VPN or not, the defualt value is True")
+parser.add_argument("--paranoid", nargs="?", default=False, help="It defines if your data goes over a VPN or not, the defualt value is False")
 args = parser.parse_args()
 paranoid = args.paranoid
 
@@ -60,7 +60,8 @@ def vpn(): #Here I am using ProtonVpn in CLI mode, you already had to install it
 
 
 def fun():
-    os.system('figlet HOTSPOT IS COMMING')
+    os.system('figlet HOTSPOT IS COMMING') // if have to make figlet installed, else you can comment this line and uncomment the next line
+    #print("Hot spot is comming\n");
 
 
 
