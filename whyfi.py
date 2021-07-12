@@ -2,14 +2,14 @@
 
 from multiprocessing import Process
 from time import sleep
-import os
+import os,subprocess
 from randmac import RandMac
 import random
 import string
 import argparse
 
 parser = argparse.ArgumentParser()
-parser.add_argument("--paranoid", nargs="?", default=False, help="It defines if your data goes over a VPN or not, the defualt value is False")
+parser.add_argument("--paranoid", nargs="?", default=True, help="It defines if your data goes over a VPN or not, the defualt value is True")
 args = parser.parse_args()
 paranoid = args.paranoid
 
@@ -25,8 +25,29 @@ def randomString(stringLength=10):
     letters = string.ascii_lowercase
     return ''.join(random.choice(letters) for i in range(stringLength))
 
+def candidator( canditate = [1,2,3,4,5,6,7,8,9,10,11]):
+    result = str(subprocess.run(['nmcli','dev','wifi'], stdout=subprocess.PIPE))
+    result = result.split()
+
+
+    channels = []
+    while "Infra" in result:
+        data = result.index("Infra")
+        channel = int(result[data+1])
+        channels.append(channel)
+        result.pop(data)
+    channels = (list(dict.fromkeys(channels)))
+
+
+    final = sorted([c for c in canditate if c not in channels])
+    return final
+
 def hotspot():
-    channels = [3,4,5,8,7,9,10]#list of channel from which a channel will be used to broadcast
+    try:
+        channels = candidator()
+    except:
+        channels = [3,4,5,8,7,9,10] #list of channel from which a channel will be used to broadcast
+
     random_mac = RandMac("00:00:00:00:00:00", True)
     line = "create_ap -c "+str(channels[random.randint(0, len(channels)-1 )])+" --hidden --mac "+str(random_mac)+" "+wireless+" "+lan+" "+randomString(random.randint(1,4))+" "+randomString(8)
     print(line)
@@ -60,19 +81,19 @@ def vpn(): #Here I am using ProtonVpn in CLI mode, you already had to install it
 
 
 def fun():
-    os.system('figlet HOTSPOT IS COMMING') # if have to make figlet installed, else you can comment this line and uncomment the next line
-    #print("Hot spot is comming");
+    os.system('figlet HOTSPOT IS COMMING')
 
 
 
 def wifi_down():
-    os.system('nmcli con down eduroam')
+    os.system('nmcli con down "eduroam 1"')
 
 
 
 fun()
 cleanup()
 wifi_down()
+sleep(3)
 p1 = Process(target=hotspot)
 p2 = Process(target=ttl_shift)
 p3 = Process(target=vpn)
@@ -85,8 +106,3 @@ p1.start()
 print("Enabling Hotspot")
 sleep(7) # So the ap being created and then after we do the time shift
 p2.start()
-
-
-
-
-
